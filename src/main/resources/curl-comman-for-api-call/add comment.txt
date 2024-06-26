@@ -1,0 +1,7 @@
+curl --location --request POST 'http://localhost:8089/api/v2/comments/add/new/Comments' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "by": "abhi",
+    "text": "This is a sample comment.",
+    "dateofcomment": "2024-06-26T15:30:00"
+}'
