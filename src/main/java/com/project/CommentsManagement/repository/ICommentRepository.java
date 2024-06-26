@@ -2,7 +2,6 @@ package com.project.CommentsManagement.repository;
 
 
 import com.project.CommentsManagement.model.Comments;
-import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
 import java.time.LocalDateTime;
@@ -18,4 +17,8 @@ public interface ICommentRepository {
     List<Comments> findCommentDateofcomment(LocalDateTime date);
 
     List<Comments> findAllComments();
+
+    String updateComment(Long id, Comments commentDetails);
+
+    String deleteCommentById(Long id);
 }

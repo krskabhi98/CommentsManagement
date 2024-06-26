@@ -1,7 +1,6 @@
 package com.project.CommentsManagement.controller;
 
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.project.CommentsManagement.constant.UriConstant;
 import com.project.CommentsManagement.model.Comments;
 import com.project.CommentsManagement.service.ICommentService;
@@ -12,11 +11,11 @@ import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/v2/comments")
 public class CommentController {
+    private static final String COMMNET_ADDED = "Comments added for user : ";
     @Autowired
     private ICommentService commentService;
 
@@ -43,9 +42,21 @@ public class CommentController {
 
     @PostMapping(UriConstant.ADD_COMMENTS)
     public ResponseEntity<String> createComment(@RequestBody Comments comment) {
-        Comments comments=commentService.saveComment(comment);
+        Comments comments = commentService.saveComment(comment);
 
-         return new ResponseEntity<>("Comments created for id : "+comments.getId(), HttpStatus.CREATED);
+        return new ResponseEntity<>(COMMNET_ADDED + comments.getBy(), HttpStatus.CREATED);
+    }
+
+    @PutMapping(UriConstant.UPDATE_COMMENT)
+    public ResponseEntity<String> updateComment(@PathVariable Long id, @RequestBody Comments commentDetails) {
+        String response = commentService.updateComment(id, commentDetails);
+        return new ResponseEntity<>(response, HttpStatus.OK);
+    }
+
+    @DeleteMapping(UriConstant.DELETE_COMMENT)
+    public ResponseEntity<String> deleteComment(@PathVariable Long id) {
+        String response = commentService.deleteComment(id);
+        return new ResponseEntity<>(response, HttpStatus.OK);
     }
 
 }

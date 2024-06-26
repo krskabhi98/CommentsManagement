@@ -4,7 +4,6 @@ import com.project.CommentsManagement.model.Comments;
 
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Optional;
 
 public interface ICommentService {
     List<Comments> getAllComments();
@@ -15,4 +14,7 @@ public interface ICommentService {
 
     Comments saveComment(Comments comment);
 
+    String updateComment(Long id, Comments commentDetails);
+
+    String deleteComment(Long id);
 }
